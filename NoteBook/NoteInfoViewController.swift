@@ -7,31 +7,40 @@
 //
 
 import UIKit
+//导入自动布局框架
 import SnapKit
 
 class NoteInfoViewController: UIViewController {
     
     var noteModel: NoteModel?
     
+    //标题文本框
     var titleTextField: UITextField?
     
+    //记事内容文本
     var bodyTextView: UITextView?
     
+    //记事所属分组
     var group: String?
     
+    //是否是新内容
     var isNew = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //消除导航对布局的影响
         self.edgesForExtendedLayout = UIRectEdge()
         self.view.backgroundColor = UIColor.white
         self.title = "记事"
         
+        //监听键盘事件
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardBeShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     
+        //进行界面的加载
         installUI()
         
+        //进行导航功能按钮的加载
         installNavigationItem()
     }
     
